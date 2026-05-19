@@ -1,0 +1,81 @@
+[project]
+name = "athena-agent"
+version = "0.1.0"
+description = "Athena - 个人成长教练 Agent 系统，基于 LangGraph 的生产级多 Agent 协作平台"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["agent", "langgraph", "llm", "multi-agent", "mcp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+# ============================================
+# 项目依赖（也可以从这里读取，无需 requirements.txt）
+# ============================================
+dependencies = [
+    "langgraph>=0.2.50",
+    "fastapi>=0.115.0",
+    "pydantic>=2.9.0",
+    # ... 与 requirements.txt 同步
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "black>=24.10.0",
+    "ruff>=0.8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourname/athena-agent"
+Documentation = "https://github.com/yourname/athena-agent/blob/main/README.md"
+Repository = "https://github.com/yourname/athena-agent"
+
+# ============================================
+# 构建系统
+# ============================================
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ============================================
+# Black 代码格式化配置
+# ============================================
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+include = '\.pyi?$'
+
+# ============================================
+# Ruff 代码检查配置（替代 flake8 + isort）
+# ============================================
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]  # line too long, black 会处理
+
+# ============================================
+# Pytest 测试配置
+# ============================================
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+addopts = "-v --cov=athena --cov-report=term-missing"
+
+# ============================================
+# Coverage 测试覆盖率配置
+# ============================================
+[tool.coverage.run]
+source = ["athena"]
+omit = ["*/tests/*", "*/__init__.py"]
