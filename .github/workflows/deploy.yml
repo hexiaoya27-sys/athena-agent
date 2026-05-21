@@ -1,0 +1,13 @@
+name: Deploy Athena
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to server
+        run: echo "TODO: 配置部署步骤"
